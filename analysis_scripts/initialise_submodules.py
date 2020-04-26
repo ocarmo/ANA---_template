@@ -33,7 +33,7 @@ def create_submodules(repositories, branch_name):
         add_submodule(repo_name=repository)
 
     commit("Adding submodules")
-    add_submodule_branches('test')
+    add_submodule_branches(branch_name)
 
     logger.info(f'Submodules created and set to branch {branch_name}')
 
