@@ -43,9 +43,7 @@ Automate the process of collecting experiments as submodules into an analysis fo
 """
 
 repositories = [
-    'experiment',
-    'EXP110_Hsp70-recombinant-client-unfolding',
-    'EXP100_Urea-unfolding-Blac-TRP-TPEMI'
+    'experiment'
 ]
 
 branch_name = 'test'
