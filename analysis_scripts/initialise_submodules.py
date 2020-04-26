@@ -16,8 +16,8 @@ def branch(branch_name):
     run("push", "-u", "origin", f'analysis_{branch_name}')
 
 
-def add_submodule(repo_name, user='dezeraecox-experiments', local_path='experimental_data/'):
-    subprocess.Popen(['git', 'submodule', 'add', f'https://github.com/{user}/{repo_name}.git', f'{local_path}{repo_name}'])
+def add_submodule(repo_name, branch='master', user='dezeraecox-experiments', local_path='experimental_data/'):
+    subprocess.Popen(['git', 'submodule', 'add', '-b', branch, f'https://github.com/{user}/{repo_name}.git', f'{local_path}{repo_name}'])
 
 
 def add_submodule_branches(branch_name):
@@ -30,7 +30,11 @@ def add_submodule_branches(branch_name):
 def create_submodules(repositories, branch_name):
 
     for repository in repositories:
-        add_submodule(repo_name=repository)
+        try:
+            repo, branch = repository.split(':')
+        except:
+            branch = 'master'
+        add_submodule(repo_name=repository, branch=branch)
 
     commit("Adding submodules")
     add_submodule_branches(branch_name)
@@ -40,6 +44,8 @@ def create_submodules(repositories, branch_name):
 """--------------------------------------------------------------------"""
 """
 Automate the process of collecting experiments as submodules into an analysis folder, then create a new branch for the combined analysis.
+
+To specify specific branch for submodules to be collected, include repo:branch in list else each repo will be added from the master branch.
 """
 
 repositories = [
