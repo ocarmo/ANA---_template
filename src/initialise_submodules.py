@@ -11,7 +11,6 @@ def commit(message):
 
 
 def branch(branch_name):
-
     run("checkout", "-b", f'analysis_{branch_name}')
     run("push", "-u", "origin", f'analysis_{branch_name}')
 
